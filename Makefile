@@ -9,9 +9,9 @@ endif
 .PHONY: setup
 
 setup:
-	go get -u golang.org/x/tools/cmd/goimports
-	go get -u golang.org/x/lint/golint
-	go get -u github.com/kyoh86/richgo
+	go install golang.org/x/tools/cmd/goimports@latest
+	go install golang.org/x/lint/golint@latest
+	go install github.com/rakyll/gotest@latest
 	go mod tidy
 
 # development tasks
@@ -28,7 +28,7 @@ vet:
 	go vet $(PACKAGES)
 
 test:
-	richgo test -v -race $(PACKAGES)
+	gotest -v -race $(PACKAGES)
 
 test.nocache:
-	richgo test -count=1 -v -race $(PACKAGES)
+	gotest -count=1 -v -race $(PACKAGES)
