@@ -1,3 +1,3 @@
 module github.com/kei2100/filesharedelete
 
-go 1.17
+go 1.20
