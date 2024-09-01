@@ -1,6 +1,4 @@
-GO ?= go
-
-PACKAGES := $(shell $(GO) list ./...)
+PACKAGES := $(shell go list ./...)
 
 GREP := grep
 ifeq ($(OS),Windows_NT)
@@ -11,10 +9,9 @@ endif
 .PHONY: setup
 
 setup:
-	$(GO) install golang.org/x/tools/cmd/goimports@latest
-	$(GO) install golang.org/x/lint/golint@latest
-	$(GO) install github.com/rakyll/gotest@latest
-	$(GO) mod tidy
+	go install golang.org/x/tools/cmd/goimports@latest
+	go install golang.org/x/lint/golint@latest
+	go install github.com/rakyll/gotest@latest
 
 # development tasks
 .PHONY: fmt lint vet test test.nocache
@@ -27,7 +24,7 @@ lint:
 	golint -set_exit_status $(PACKAGES)
 
 vet:
-	$(GO) vet $(PACKAGES)
+	go vet $(PACKAGES)
 
 test:
 	gotest -v -race $(PACKAGES)
